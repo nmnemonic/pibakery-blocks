@@ -6,6 +6,7 @@
     "vncenable",
     "sshenable",
 	"serviceenable",
+    "updateupgrade",
     "packageinstall",
     "lampinstall",
     "iqaudio",
