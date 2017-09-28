@@ -15,7 +15,7 @@
 		},
 		{
 			"type": "menu",
-			"options": ["WPA/WPA2", "WEP", "Open (no password)"]
+			"options": ["Default", "WPA/WPA2", "WEP", "Open (no password)"]
 		}
 	],
 	"network": false,

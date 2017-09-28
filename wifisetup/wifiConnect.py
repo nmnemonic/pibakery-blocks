@@ -28,6 +28,14 @@ network={
     psk="WIFI-PSK"
 }"""
 
+defaultWifi = """
+
+network={
+    ssid="WIFI-SSID"
+    scan_ssid=1
+    psk="WIFI-PSK"
+}"""
+
 wifiSSID = sys.argv[1]
 wifiPSK = sys.argv[2]
 wifiType = sys.argv[3]
@@ -39,6 +47,8 @@ if wifiSSID != "" and wifiType != "":
 		wifiText = wepWifi.replace("WIFI-SSID", wifiSSID).replace("WIFI-PSK", wifiPSK)
 	elif wifiType == "WPA/WPA2":
 		wifiText = wpaWifi.replace("WIFI-SSID", wifiSSID).replace("WIFI-PSK", wifiPSK)
+	elif wifiType == "Default":
+		wifiText = defaultWifi.replace("WIFI-SSID", wifiSSID).replace("WIFI-PSK", wifiPSK)
 
 with open("/etc/wpa_supplicant/wpa_supplicant.conf", "a") as wifiFile:
 	wifiFile.write(wifiText)
