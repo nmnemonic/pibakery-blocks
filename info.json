@@ -5,7 +5,7 @@
   "loadOrder": [
     "vncenable",
     "sshenable",
-	"serviceenable",
+    "serviceenable",
     "updateupgrade",
     "packageinstall",
     "lampinstall",
@@ -30,12 +30,13 @@
     "set1wire",
     "changesshkeys",
     "authorizekey",
-	"copyfile",
+    "copyfile",
     "runcommand",
     "runpython",
     "deletefile",
     "reboot",
     "shutdown",
+    "watchdog",
     "nodejsinstall"
   ]
 }
