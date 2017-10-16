@@ -11,6 +11,7 @@
     "lampinstall",
     "iqaudio",
     "wifisetup",
+    "staticipsetup",
     "docker",
     "downloadfile",
     "otgether",
