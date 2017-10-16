@@ -28,6 +28,7 @@
     "setspi",
     "seti2c",
     "set1wire",
+    "memsplit",
     "changesshkeys",
     "authorizekey",
     "copyfile",
