@@ -33,6 +33,7 @@
     "runpython",
     "deletefile",
     "reboot",
-    "shutdown"
+    "shutdown",
+    "nodejsinstall"
   ]
 }
