@@ -22,7 +22,7 @@ if [ -d $2 ]
 then
   filename="$(getUriFilename $1)"
   echo $filename
-  curl -A 'PiBakery' -o "$2/$filename" "$1" -L
+  curl -A 'PiBakery' -o "$2/$filename" "$1" -L --insecure
 else
-  curl -A 'PiBakery' -o "$2" "$1" -L
+  curl -A 'PiBakery' -o "$2" "$1" -L --insecure
 fi
