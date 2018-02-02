@@ -32,36 +32,21 @@ fi
 echo "g_ether" | tee -a /etc/modules
 
 # Remove the static IP stuff from /etc/dhcpcd.conf if it exists
-startLine=$(grep -n "interface usb0 " /etc/dhcpcd.conf | cut -d : -f 1)
-if [ ! -z "$startLine" ]
-then
-  matchLine=$((startLine+1))
-  grep -n "static " /etc/dhcpcd.conf | cut -d : -f 1 | while read line
-  do
-    if [ $line -eq $matchLine ]
-    then
-      endLine=$line
-      sed -i "${startLine}d;${endLine}d" /etc/dhcpcd.conf
-    fi
-  done
-fi
-
-# Add the static IP to /etc/dhcpcd.conf, if one is set
-# This is optional because on Windows in case there is
-# a DHCP on the other end
-if [ ! -z "$1" ]
-then
-  echo -e "interface usb0 \nstatic ip_address=$1" | tee -a /etc/dhcpcd.conf
-
-  # If a second argument is specified, add it as a router
-  if [ ! -z "$2" ]
+if [ -f /etc/dhcpcd.exit-hook ]; then
+  startLine=$(grep -n "if \[ \"\$interface\" = \"usb0\" \]; then" /etc/dhcpcd.exit-hook | cut -d : -f 1)
+  if [ ! -z "$startLine" ]
   then
-    echo -e "static routers=$2" | tee -a /etc/dhcpcd.conf
-
-    # If a third argument is specified, add it as a nameserver
-    if [ ! -z "$3" ]
-    then
-      echo -e "static domain_name_servers=$3"| tee -a /etc/dhcpcd.conf
-    fi
+    matchLine=$((startLine+2))
+    grep -n "fi" /etc/dhcpcd.exit-hook | cut -d : -f 1 | while read line
+    do
+      if [ $line -eq $matchLine ]
+      then
+        endLine=$line
+        sed -i "${startLine},${endLine}d" /etc/dhcpcd.exit-hook
+      fi
+    done
   fi
 fi
+
+# add the stattic IP to the usb0 interface
+echo -e "if [ \"\$interface\" = \"usb0\" ]; then\n  ip addr add $1 dev usb0\nfi" >> /etc/dhcpcd.exit-hook
